@@ -12,7 +12,7 @@ class Login extends React.Component {
 	 */
 	handleSubmit = (event) => {
 		event.preventDefault();
-		this.props.history.push('/dashboard');
+		this.props.history.push('/dashboard/home');
 	};
 
 	/**

@@ -10,7 +10,7 @@ export default class News extends React.Component {
 	 */
 	render() {
 		return (
-			<h1>News</h1>
+			<h1 className="py-5">News</h1>
 		);
 	}
 }

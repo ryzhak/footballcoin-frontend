@@ -10,7 +10,7 @@ export default class Squad extends React.Component {
 	 */
 	render() {
 		return (
-			<h1>Squad</h1>
+			<h1 className="py-5">Squad</h1>
 		);
 	}
 }
