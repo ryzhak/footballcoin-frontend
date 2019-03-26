@@ -18,16 +18,29 @@ export async function login(login, password) {
  * Registers user and returns user auth details
  * @param {string} username User login
  * @param {string} password User password
- *  @returns {Promise} Promise with user credentials 
+ * @returns {Promise} Promise with user credentials 
  */
 export async function register(username, password) {
 	return await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {username, password});
 }
 
 /**
+ * News methods
+ */
+
+/**
+ * Returns all available news
+ * @returns {Promise} Promise with news objects
+ */
+export async function getNews() {
+	return await axios.get(`${process.env.REACT_APP_API_URL}/news`);
+}
+
+/**
  * Default object to export
  */
 export default {
+	getNews,
 	login,
 	register
 };
