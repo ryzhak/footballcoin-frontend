@@ -1,3 +1,6 @@
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
