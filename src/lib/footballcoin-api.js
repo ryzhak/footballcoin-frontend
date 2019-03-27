@@ -29,11 +29,43 @@ export async function register(username, password) {
  */
 
 /**
+ * Creates a new news item
+ * @param {string} accessToken User access token 
+ * @param {string} caption News caption 
+ * @param {string} content News content
+ * @returns {Promise} Promise with news item data 
+ */
+export async function createNews(accessToken, caption, content) {
+	return await axios.post(`${process.env.REACT_APP_API_URL}/news`, {caption, content}, {headers: {'Authorization': `Bearer ${accessToken}`}});
+}
+
+/**
+ * Deletes news item by id
+ * @param {string} accessToken User access token 
+ * @param {string} id News id
+ */
+export async function deleteNews(accessToken, id) {
+	return await axios.delete(`${process.env.REACT_APP_API_URL}/news/${id}`, {headers: {'Authorization': `Bearer ${accessToken}`}});
+}
+
+/**
  * Returns all available news
  * @returns {Promise} Promise with news objects
  */
 export async function getNews() {
 	return await axios.get(`${process.env.REACT_APP_API_URL}/news`);
+}
+
+/**
+ * Updates news by id
+ * @param {string} accessToken User access token 
+ * @param {string} id News id
+ * @param {string} caption News caption 
+ * @param {string} content News content
+ * @returns {Promise} Promise with news item data 
+ */
+export async function updateNews(accessToken, id, caption, content) {
+	return await axios.patch(`${process.env.REACT_APP_API_URL}/news/${id}`, {caption, content}, {headers: {'Authorization': `Bearer ${accessToken}`}});
 }
 
 /**
@@ -52,9 +84,12 @@ export async function getPlayers() {
  * Default object to export
  */
 export default {
+	createNews,
+	deleteNews,
 	getNews,
 	getPlayers,
 	login,
-	register
+	register,
+	updateNews
 };
 
