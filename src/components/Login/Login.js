@@ -1,6 +1,6 @@
 import { Growl } from 'primereact/growl';
 import React from 'reactn';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import footballCoinApi from '../../lib/footballcoin-api';
 
@@ -72,6 +72,7 @@ class Login extends React.Component {
 									<input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" className="form-control border-0 shadow form-control-lg text-violet" />
 								</div>
 								<button type="submit" className="btn btn-primary shadow px-5" disabled={!this.validateForm()}>Log in</button>
+								<Link to="/registration" className="navbar-brand font-weight-bold text-base ml-3">Sign Up</Link>
 							</form>
 						</div>
 					</div>
