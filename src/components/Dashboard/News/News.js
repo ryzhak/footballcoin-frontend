@@ -22,7 +22,7 @@ export default class News extends React.Component {
 	}
 
 	/**
-	 * On component initial render
+	 * On component finish render
 	 */
 	async componentDidMount() {
 		try {

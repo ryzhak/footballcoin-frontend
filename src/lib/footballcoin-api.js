@@ -37,10 +37,23 @@ export async function getNews() {
 }
 
 /**
+ * Player methods
+ */
+
+/**
+ * Returns all players
+ * @returns {Promise} Promise with players objects
+ */
+export async function getPlayers() {
+	return await axios.get(`${process.env.REACT_APP_API_URL}/players`);
+}
+
+/**
  * Default object to export
  */
 export default {
 	getNews,
+	getPlayers,
 	login,
 	register
 };
