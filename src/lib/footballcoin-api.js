@@ -73,6 +73,40 @@ export async function updateNews(accessToken, id, caption, content) {
  */
 
 /**
+ * Creates a new player
+ * @param {string} accessToken User access token 
+ * @param {string} name Player name 
+ * @param {string} surname Player surname 
+ * @param {string} position Player position 
+ * @param {File} photoFile File with player photo
+ * @returns {Promise} Promise with player data  
+ */
+export async function createPlayer(accessToken, name, surname, position, photoFile) {
+	const url = `${process.env.REACT_APP_API_URL}/players`;
+	const formData = new FormData();
+	formData.append('name', name);
+	formData.append('surname', surname);
+	formData.append('position', position.toUpperCase());
+	formData.append('photo', photoFile);
+	const config = {
+		headers: {
+			'Authorization': `Bearer ${accessToken}`,
+			'Content_Type': 'multipart/form-data'
+		},
+	};
+	return await axios.post(url, formData, config);
+}
+
+/**
+ * Deletes player
+ * @param {string} accessToken User access token 
+ * @param {string} id Player id 
+ */
+export async function deletePlayer(accessToken, id) {
+	return await axios.delete(`${process.env.REACT_APP_API_URL}/players/${id}`, {headers: {'Authorization': `Bearer ${accessToken}`}});
+}
+
+/**
  * Returns all players
  * @returns {Promise} Promise with players objects
  */
@@ -81,15 +115,44 @@ export async function getPlayers() {
 }
 
 /**
+ * Updates player
+ * @param {string} accessToken User access token
+ * @param {string} id Player id 
+ * @param {string} name Player name 
+ * @param {string} surname Player surname 
+ * @param {string} position Player position 
+ * @param {File} photoFile File with player photo
+ * @returns {Promise} Promise with player data  
+ */
+export async function updatePlayer(accessToken, id, name, surname, position, photoFile) {
+	const url = `${process.env.REACT_APP_API_URL}/players/${id}`;
+	const formData = new FormData();
+	formData.append('name', name);
+	formData.append('surname', surname);
+	formData.append('position', position.toUpperCase());
+	if(photoFile) formData.append('photo', photoFile);
+	const config = {
+		headers: {
+			'Authorization': `Bearer ${accessToken}`,
+			'Content_Type': 'multipart/form-data'
+		},
+	};
+	return await axios.patch(url, formData, config);
+}
+
+/**
  * Default object to export
  */
 export default {
 	createNews,
+	createPlayer,
 	deleteNews,
+	deletePlayer,
 	getNews,
 	getPlayers,
 	login,
 	register,
-	updateNews
+	updateNews,
+	updatePlayer
 };
 
