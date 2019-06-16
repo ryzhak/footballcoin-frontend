@@ -23,6 +23,7 @@ export default class Squad extends React.Component {
 				name: '',
 				surname: '',
 				position: '',
+				desc: '',
 				file: null
 			},
 			players: []
@@ -76,7 +77,7 @@ export default class Squad extends React.Component {
 			const resp = await footballCoinApi.getPlayers();
 			this.setState({
 				displayDialog: false,
-				form: {_id: null, name: '', surname: '', position: '', file: null},
+				form: {_id: null, name: '', surname: '', position: '', desc: '', file: null},
 				players: resp.data
 			});
 		} catch(err) {
@@ -120,7 +121,7 @@ export default class Squad extends React.Component {
 									</div>
 									<div className="col-lg-9 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
 										<div className="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-3 mt-2 mt-lg-0 text-dark exclode">{player.position}</div>
-										<p className="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+										<p className="mb-0 mt-3 mt-lg-0">{player.desc}</p>
 									</div>
 								</div>
 							</span>
@@ -141,6 +142,10 @@ export default class Squad extends React.Component {
 						<div className="form-group mb-4">
 							<label className="form-control-label">Position</label>
 							<input type="text" name="position" value={this.state.form.position} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
+						</div>
+						<div className="form-group mb-4">
+							<label className="form-control-label">Description</label>
+							<input type="text" name="desc" value={this.state.form.desc} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
 						</div>
 						<div className="form-group mb-4">
 							<label className="form-control-label">Photo</label>
@@ -169,9 +174,9 @@ export default class Squad extends React.Component {
 		try {
 			// if new model then create
 			if(!this.state.form._id) {
-				await footballCoinApi.createPlayer(this.global.user.accessToken, this.state.form.name, this.state.form.surname, this.state.form.position, this.state.form.file);
+				await footballCoinApi.createPlayer(this.global.user.accessToken, this.state.form.name, this.state.form.surname, this.state.form.position, this.state.form.desc, this.state.form.file);
 			} else {
-				await footballCoinApi.updatePlayer(this.global.user.accessToken, this.state.form._id, this.state.form.name, this.state.form.surname, this.state.form.position, this.state.form.file);
+				await footballCoinApi.updatePlayer(this.global.user.accessToken, this.state.form._id, this.state.form.name, this.state.form.surname, this.state.form.position, this.state.form.desc, this.state.form.file);
 			}
 			await this.init();
 		} catch(err) {
@@ -190,7 +195,8 @@ export default class Squad extends React.Component {
 				_id: player._id,
 				name: player.name,
 				surname: player.surname,
-				position: player.position
+				position: player.position,
+				desc: player.desc
 			}
 		});
 	}

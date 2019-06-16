@@ -78,15 +78,17 @@ export async function updateNews(accessToken, id, caption, content) {
  * @param {string} name Player name 
  * @param {string} surname Player surname 
  * @param {string} position Player position 
+ * @param {string} desc Player text description
  * @param {File} photoFile File with player photo
  * @returns {Promise} Promise with player data  
  */
-export async function createPlayer(accessToken, name, surname, position, photoFile) {
+export async function createPlayer(accessToken, name, surname, position, desc, photoFile) {
 	const url = `${process.env.REACT_APP_API_URL}/players`;
 	const formData = new FormData();
 	formData.append('name', name);
 	formData.append('surname', surname);
 	formData.append('position', position.toUpperCase());
+	formData.append('desc', desc);
 	formData.append('photo', photoFile);
 	const config = {
 		headers: {
@@ -121,15 +123,17 @@ export async function getPlayers() {
  * @param {string} name Player name 
  * @param {string} surname Player surname 
  * @param {string} position Player position 
+ * @param {string} desc Player description
  * @param {File} photoFile File with player photo
  * @returns {Promise} Promise with player data  
  */
-export async function updatePlayer(accessToken, id, name, surname, position, photoFile) {
+export async function updatePlayer(accessToken, id, name, surname, position, desc, photoFile) {
 	const url = `${process.env.REACT_APP_API_URL}/players/${id}`;
 	const formData = new FormData();
 	formData.append('name', name);
 	formData.append('surname', surname);
 	formData.append('position', position.toUpperCase());
+	formData.append('desc', desc);
 	if(photoFile) formData.append('photo', photoFile);
 	const config = {
 		headers: {
