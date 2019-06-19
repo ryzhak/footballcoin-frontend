@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reactn';
 import { Link, NavLink, Route } from 'react-router-dom';
 
 import Club from './Club';
@@ -11,11 +11,27 @@ import Schedule from './Schedule';
 import Squad from './Squad';
 import Staff from './Staff';
 import Tactics from './Tactics';
+import pollSystemContract from '../../lib/poll-system-contract';
+import web3Service from '../../lib/web3-service';
 
 /**
  * Dashboard component
  */
 export default class Dashboard extends React.Component {
+
+	/**
+	 * On component finish render
+	 */
+	componentDidMount() {
+		// initialize web3
+		if(web3Service.init()) {
+			// initialize poll system contract
+			pollSystemContract.init();
+		} else {
+			// show error if failed to init web3
+			alert('Please install MetaMask');
+		}
+	}
 
 	/**
 	 * Renders component template
@@ -45,9 +61,12 @@ export default class Dashboard extends React.Component {
 							<li className="sidebar-list-item">
 								<NavLink to="/dashboard/squad" className="sidebar-link text-muted"><i className="o-user-details-1 mr-3 text-gray"></i><span>Squad</span></NavLink>
 							</li>
-							<li className="sidebar-list-item">
-								<NavLink to="/dashboard/customer" className="sidebar-link text-muted"><i className="o-user-1 mr-3 text-gray"></i><span>Customers</span></NavLink>
-							</li>
+							{/* Visible only by admin */}
+							{ this.global.user && this.global.user.role === 'admin' && 
+								<li className="sidebar-list-item">
+									<NavLink to="/dashboard/customer" className="sidebar-link text-muted"><i className="o-user-1 mr-3 text-gray"></i><span>Customers</span></NavLink>
+								</li>
+							}
 							<li className="sidebar-list-item">
 								<NavLink to="/dashboard/poll" className="sidebar-link text-muted"><i className="o-survey-1 mr-3 text-gray"></i><span>Polls</span></NavLink>
 							</li>
