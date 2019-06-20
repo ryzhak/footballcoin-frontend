@@ -115,22 +115,22 @@ export default class News extends React.Component {
 				)}
 				{/* News form */}
 				<Dialog header="News form" visible={this.state.displayDialog} style={{width: '50vw'}} onHide={(e) => this.setState({displayDialog: false})}>
-						<form id="newsForm" className="mt-4">
-							<div className="form-group mb-4">
-								<label className="form-control-label">Caption</label>
-								<input type="text" name="caption" value={this.state.form.caption} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
-							</div>
-							<div className="form-group mb-4">
-								<label className="form-control-label">Content</label>
-								<textarea name="content" value={this.state.form.content} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" rows="6" />
-							</div>
-							<div className="form-group mb-4 text-right">
-								<button type="button" className="btn btn-primary shadow px-5 mr-1" onClick={this.save} disabled={!this.validateForm()}>Save</button>
-								{ this.state.form._id && 
-									<button type="button" className="btn btn-danger shadow px-5" onClick={this.delete}>Delete</button>
-								}
-							</div>
-						</form>
+					<form id="newsForm" className="mt-4">
+						<div className="form-group mb-4">
+							<label className="form-control-label">Caption</label>
+							<input type="text" name="caption" value={this.state.form.caption} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
+						</div>
+						<div className="form-group mb-4">
+							<label className="form-control-label">Content</label>
+							<textarea name="content" value={this.state.form.content} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" rows="6" />
+						</div>
+						<div className="form-group mb-4 text-right">
+							<button type="button" className="btn btn-primary shadow px-5 mr-1" onClick={this.save} disabled={!this.validateForm()}>Save</button>
+							{ this.state.form._id && 
+								<button type="button" className="btn btn-danger shadow px-5" onClick={this.delete}>Delete</button>
+							}
+						</div>
+					</form>
 				</Dialog>
 				{/* Notification message component */}
 				<Growl ref={(el) => this.growl = el}></Growl>

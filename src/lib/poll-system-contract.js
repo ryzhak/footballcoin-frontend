@@ -24,6 +24,19 @@ export async function addUser(userAddress) {
 }
 
 /**
+ * Creates a new poll
+ * @param {number} consensusRate consensus rate, 10000 = 100%
+ * @param {number} quorumRate quorum rate, 10000 = 100% 
+ * @param {number} availableUntil unix timestamp when poll is finished 
+ * @param {string} question proposal text 
+ * @param {Array<string>} choices array of choices 
+ */
+export async function createPoll(consensusRate, quorumRate, availableUntil, question, choices) {
+	const accounts = await web3Service.getAccounts();
+	await contract.methods.createPoll(consensusRate, quorumRate, availableUntil, question, choices).send({from: accounts[0]});
+}
+
+/**
  * Removes user from voting group
  * @param {string} userAddress user ethereum address
  */
@@ -115,7 +128,7 @@ export async function getVotings() {
 	const count = await votingsCount();
 	// for all votings
 	for(let i = 0; i < count; i++) {
-		const votingInfo = await votings(0);
+		const votingInfo = await votings(i);
 		// get choices
 		let choices = [];
 		const texts = await getChoicesFromVoting(i);
@@ -123,7 +136,7 @@ export async function getVotings() {
 		for(let j = 0; j < votingInfo.choicesCount.toNumber(); j++) {
 			choices.push({
 				text: texts[j],
-				votesCount: votesCount[j].toNumber()
+				votesCount: votesCount[j] ? votesCount[j].toNumber() : 0
 			});
 		}
 		// set voting params and choices
@@ -145,6 +158,7 @@ export async function getVotings() {
  */
 export default {
 	addUser,
+	createPoll,
 	getChoicesFromVoting,
 	getUsers,
 	getVotesCount,

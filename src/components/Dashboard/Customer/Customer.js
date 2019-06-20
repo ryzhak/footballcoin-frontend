@@ -103,15 +103,15 @@ export default class Customer extends React.Component {
 				</section>
 				{/* Customer form */}
 				<Dialog header="Customer form" visible={this.state.displayDialog} style={{width: '50vw'}} onHide={(e) => this.setState({displayDialog: false})}>
-						<form id="customerForm" className="mt-4">
-							<div className="form-group mb-4">
-								<label className="form-control-label">Customer address</label>
-								<input type="text" name="address" value={this.state.form.address} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
-							</div>
-							<div className="form-group mb-4 text-right">
-								<button type="button" className="btn btn-primary shadow px-5 mr-1" onClick={this.save} disabled={!this.validateForm()}>Save</button>
-							</div>
-						</form>
+					<form id="customerForm" className="mt-4">
+						<div className="form-group mb-4">
+							<label className="form-control-label">Customer address</label>
+							<input type="text" name="address" value={this.state.form.address} onChange={this.handleInputChange} className="form-control border-0 shadow form-control-lg" />
+						</div>
+						<div className="form-group mb-4 text-right">
+							<button type="button" className="btn btn-primary shadow px-5 mr-1" onClick={this.save} disabled={!this.validateForm()}>Save</button>
+						</div>
+					</form>
 				</Dialog>
 			</React.Fragment>
 		);
@@ -133,7 +133,7 @@ export default class Customer extends React.Component {
 	}
 
 	/**
-	 * Validates news form
+	 * Validates customer form
 	 * @returns {boolean} Whether form is valid
 	 */
 	validateForm = () => {
